@@ -19,7 +19,6 @@ public class ApplicationDbContext
     public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
         : base(options, operationalStoreOptions)
     {
-
     }
 
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
