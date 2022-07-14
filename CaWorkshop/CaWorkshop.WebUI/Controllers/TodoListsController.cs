@@ -11,7 +11,7 @@ namespace CaWorkshop.WebUI.Controllers;
 public class TodoListsController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TodoList>>> GetTodoLists()
+    public async Task<ActionResult<TodosVm>> GetTodoLists()
     {
         return await Mediator.Send(new GetTodoListsQuery());
     }

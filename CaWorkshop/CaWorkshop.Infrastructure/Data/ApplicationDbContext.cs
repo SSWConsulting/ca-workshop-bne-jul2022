@@ -32,4 +32,14 @@ public class ApplicationDbContext
 
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+#if DEBUG
+        optionsBuilder
+            .EnableDetailedErrors();
+#endif
+
+        base.OnConfiguring(optionsBuilder);
+    }
 }
