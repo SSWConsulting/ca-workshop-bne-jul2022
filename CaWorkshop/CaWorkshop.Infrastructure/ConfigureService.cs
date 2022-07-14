@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CaWorkshop.Application.Common.Interfaces;
 
 namespace CaWorkshop.Infrastructure;
 
@@ -18,6 +19,9 @@ public static class ConfigureServices
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddScoped<IApplicationDbContext>(sp =>
+            sp.GetRequiredService<ApplicationDbContext>());
+        
         services.AddScoped<ApplicationDbContextInitialiser>();
 
         services.AddDefaultIdentity<ApplicationUser>()
