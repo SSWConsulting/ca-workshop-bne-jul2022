@@ -2,7 +2,6 @@ using CaWorkshop.Application.TodoLists.Commands.CreateTodoList;
 using CaWorkshop.Application.TodoLists.Commands.DeleteTodoList;
 using CaWorkshop.Application.TodoLists.Commands.UpdateTodoList;
 using CaWorkshop.Application.TodoLists.Queries.GetTodoLists;
-using CaWorkshop.Domain.Entities;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +18,9 @@ public class TodoListsController : ApiControllerBase
     // POST: api/TodoLists
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
+    [ProducesResponseType(typeof(int),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+    
     public async Task<ActionResult<int>> PostTodoList(CreateTodoListCommand command)
     {
         return await Mediator.Send(command);

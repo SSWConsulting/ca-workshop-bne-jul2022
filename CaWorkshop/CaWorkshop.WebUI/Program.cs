@@ -57,6 +57,8 @@ app.UseStaticFiles();
 
 app.UseOpenApi();
 app.UseSwaggerUi3();
+app.UseReDoc(configure =>
+    configure.Path = "/redoc");
 
 app.UseRouting();
 
