@@ -1,6 +1,6 @@
 ﻿namespace CaWorkshop.Domain.Entities;
 
-public class TodoList
+public class TodoList : AuditableEntity
 {
     public int Id { get; set; }
 

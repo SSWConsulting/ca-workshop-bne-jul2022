@@ -2,10 +2,12 @@ using CaWorkshop.Application.TodoItems.Commands.CreateTodoItem;
 using CaWorkshop.Application.TodoItems.Commands.DeleteTodoItem;
 using CaWorkshop.Application.TodoItems.Commands.UpdateTodoItem;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaWorkshop.WebUI.Controllers;
 
+[Authorize]
 public class TodoItemsController : ApiControllerBase
 {
     // POST: api/TodoItems

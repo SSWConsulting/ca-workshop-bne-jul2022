@@ -2,6 +2,7 @@
 
 using CaWorkshop.Application.Common.Interfaces;
 using CaWorkshop.Domain.Entities;
+using CaWorkshop.Infrastructure.Data.Interceptors;
 using CaWorkshop.Infrastructure.Identity;
 
 using Duende.IdentityServer.EntityFramework.Options;
@@ -16,9 +17,15 @@ public class ApplicationDbContext
     : ApiAuthorizationDbContext<ApplicationUser>, 
     IApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
-        : base(options, operationalStoreOptions)
+    private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
+
+    public ApplicationDbContext(
+        DbContextOptions options, 
+        IOptions<OperationalStoreOptions> operationalStoreOptions,
+        AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor)
+            : base(options, operationalStoreOptions)
     {
+        _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
     }
 
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
@@ -38,6 +45,9 @@ public class ApplicationDbContext
         optionsBuilder
             .EnableDetailedErrors();
 #endif
+
+        optionsBuilder
+            .AddInterceptors(_auditableEntitySaveChangesInterceptor);
 
         base.OnConfiguring(optionsBuilder);
     }
