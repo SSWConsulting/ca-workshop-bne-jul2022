@@ -39,6 +39,11 @@ builder.Services.AddOpenApiDocument(configure =>
         new AspNetCoreOperationSecurityScopeProcessor("JWT"));
 });
 
+builder.Services.AddLogging(configure =>
+{
+    configure.AddSeq();
+});
+
 var app = builder.Build();
 
 #if DEBUG
