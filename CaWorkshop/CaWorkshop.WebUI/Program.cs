@@ -11,6 +11,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddRazorPages();
 
 builder.Services.AddOpenApiDocument(configure =>
